@@ -8,9 +8,6 @@
 
 Brewbean's Coffee is a full-stack e-commerce application designed for premium coffee products. The platform allows users to browse coffee beans, equipment, and accessories, manage a shopping cart, place orders, and track delivery status. Administrators can manage products, view and update order statuses, and access sales analytics.
 
-**Planned End Date:** January 15, 2025  
-**Release Date:** April 16, 2025
-
 ## ✨ Features
 
 - **User Authentication & Profiles**
