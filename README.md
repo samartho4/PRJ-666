@@ -48,7 +48,6 @@ Brewbean's Coffee is a full-stack e-commerce application designed for premium co
 - **Framework**: [Express](https://expressjs.com/)
 - **Database**: [MongoDB](https://www.mongodb.com/) with Mongoose ODM
 - **Authentication**: JWT (JSON Web Tokens)
-- **Payment Processing**: [Stripe API](https://stripe.com/)
 
 ## 🚀 Getting Started
 
