@@ -1,631 +1,271 @@
-# Brewbean's Coffee - Code Documentation
+# Brewbean's Coffee - User Documentation
 
 ## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Technology Stack](#technology-stack)
-3. [Project Structure](#project-structure)
-4. [Frontend](#frontend)
-   - [Setup and Configuration](#frontend-setup-and-configuration)
-   - [Key Components](#key-components)
-   - [State Management](#state-management)
-   - [Routing](#routing)
-   - [UI Components](#ui-components)
-5. [Backend](#backend)
-   - [Setup and Configuration](#backend-setup-and-configuration)
-   - [API Endpoints](#api-endpoints)
-   - [Controllers](#controllers)
-   - [Models](#models)
-   - [Middleware](#middleware)
-6. [Authentication](#authentication)
-7. [Database](#database)
-8. [Deployment](#deployment)
-9. [Testing](#testing)
-10. [Common Issues and Solutions](#common-issues-and-solutions)
-
-## Project Overview
-
-Brewbean's Coffee is a full-stack e-commerce application designed for selling premium coffee products. The platform includes user authentication, product browsing, shopping cart functionality, checkout process, order management, and an admin dashboard.
-
-## Technology Stack
-
-### Frontend
-- **Framework**: React 19
-- **Routing**: Next.js 15
-- **State Management**: Context API & React Hooks
-- **Styling**: Tailwind CSS with Shadcn UI
-- **Form Handling**: React Hook Form with Zod validation
-- **Data Visualization**: Recharts
-- **Deployment**: Vercel
-
-### Backend
-- **Runtime**: Node.js
-- **Framework**: Express
-- **Database**: MongoDB with Mongoose ODM
-- **Authentication**: JSON Web Tokens (JWT)
-
-## Project Structure
-
-The project follows a standard client-server architecture with separate directories for frontend and backend:
-
-```
-brewbeans-coffee/
-├── client/                    # Frontend React application
-│   ├── components/            # Reusable UI components
-│   ├── pages/                 # Page components
-│   ├── public/                # Static assets
-│   └── ...                    # Configuration files
-│
-└── server/                    # Backend Express application
-    ├── config/                # Configuration files
-    ├── controllers/           # Route controllers
-    ├── middleware/            # Custom middleware
-    ├── models/                # Mongoose models
-    ├── routes/                # API routes
-    └── ...                    # Other server files
-```
-
-## Frontend
-
-### Frontend Setup and Configuration
-
-1. **Environment Setup**
-
-   The frontend is built with Next.js 15 and requires Node.js 18+ to run. Key configuration files include:
-
-   - `next.config.mjs`: Next.js configuration
-   - `tailwind.config.js`: Tailwind CSS configuration
-   - `tsconfig.json`: TypeScript configuration
-
-2. **Dependencies**
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+   - [Account Creation](#account-creation)
+   - [Logging In](#logging-in)
+   - [Password Recovery](#password-recovery)
+3. [Shopping](#shopping)
+   - [Browsing Products](#browsing-products)
+   - [Product Details](#product-details)
+   - [Search and Filters](#search-and-filters)
+4. [Shopping Cart](#shopping-cart)
+   - [Adding Products](#adding-products)
+   - [Modifying Quantities](#modifying-quantities)
+   - [Removing Products](#removing-products)
+5. [Checkout Process](#checkout-process)
+   - [Shipping Information](#shipping-information)
+   - [Payment Options](#payment-options)
+   - [Order Review](#order-review)
+6. [Order Management](#order-management)
+   - [Order History](#order-history)
+   - [Order Status Tracking](#order-status-tracking)
+7. [User Profile](#user-profile)
+   - [Profile Management](#profile-management)
+   - [Address Book](#address-book)
+   - [Password Changes](#password-changes)
+8. [Troubleshooting](#troubleshooting)
+   - [Common Issues](#common-issues)
+   - [Contact Support](#contact-support)
+
+## Introduction
+
+Welcome to Brewbean's Coffee, your premier online destination for premium coffee products! Our platform offers a wide range of coffee beans, brewing equipment, and accessories to enhance your coffee experience.
+
+This documentation will guide you through the features and functionality of our e-commerce platform, helping you navigate, shop, and manage your orders with ease.
+
+## Getting Started
 
-   Key dependencies include:
-   - React 19 for UI
-   - Next.js 15 for routing and SSR
-   - Tailwind CSS for styling
-   - Shadcn UI for component library
-   - React Hook Form for form handling
-   - Zod for validation
-   - Recharts for data visualization
+### Account Creation
 
-3. **Starting the Frontend**
+To create a new account:
 
-   ```bash
-   cd client
-   npm install
-   npm run dev
-   ```
+1. Click on the "Register" button in the top-right corner of the homepage
+2. Fill in the required information:
+   - Full Name
+   - Email Address
+   - Password (minimum 6 characters)
+   - Phone Number (optional)
+   - Address (optional at this stage)
+3. Click "Create Account"
+4. Verify your email address by clicking the link sent to your email
 
-   This starts the development server at http://localhost:3000
+### Logging In
 
-### Key Components
+To log in to your existing account:
 
-1. **Context Providers**
+1. Click on the "Login" button in the top-right corner of the homepage
+2. Enter your email address and password
+3. Click "Login"
+4. If you check "Remember Me," your session will remain active for 30 days
 
-   The application uses React Context for state management:
+### Password Recovery
 
-   - `AuthContext`: Manages user authentication state
-   - `CartContext`: Handles shopping cart state
-   - `ThemeContext`: Manages light/dark mode preferences
+If you've forgotten your password:
 
-   Example usage:
+1. Click on the "Login" button
+2. Click on "Forgot Password" below the login form
+3. Enter your email address
+4. Click "Reset Password"
+5. Check your email for password reset instructions
+6. Follow the link to create a new password
 
-   ```jsx
-   // AuthContext.js
-   export const AuthContext = createContext();
+## Shopping
 
-   export const AuthProvider = ({ children }) => {
-     const [user, setUser] = useState(null);
-     const [loading, setLoading] = useState(true);
+### Browsing Products
 
-     // Authentication logic here
+Our products are organized into categories for easy browsing:
 
-     return (
-       <AuthContext.Provider value={{ user, login, logout, register, loading }}>
-         {children}
-       </AuthContext.Provider>
-     );
-   };
+- **Coffee Beans**: Browse by region, roast level, or flavor profile
+- **Equipment**: Brewing equipment, grinders, and accessories
+- **Merchandise**: Brewbean's branded items
 
-   // Usage in a component
-   const { user, login } = useContext(AuthContext);
-   ```
+To browse products:
 
-2. **Layout Components**
+1. Click on the desired category from the main navigation menu
+2. Scroll through available products
+3. Use filters on the left sidebar to narrow down options
 
-   The application uses a consistent layout across pages:
+### Product Details
 
-   - `Layout`: Main layout wrapper with header, footer, and content area
-   - `DashboardLayout`: Admin dashboard layout
+To view detailed information about a product:
 
-3. **Page Components**
+1. Click on the product image or name
+2. The product page displays:
+   - High-resolution images
+   - Price and availability
+   - Detailed description
+   - Specifications
+   - Customer reviews and ratings
 
-   Each route corresponds to a page component in the `pages` directory:
+### Search and Filters
 
-   - `index.js`: Homepage
-   - `products/[id].js`: Product detail page
-   - `cart.js`: Shopping cart page
-   - `checkout.js`: Checkout page
-   - `profile.js`: User profile page
+To find specific products:
 
-### State Management
+1. Use the search bar at the top of the page
+2. Enter keywords related to the product you're looking for
+3. Apply filters to refine search results:
+   - Price range
+   - Product category
+   - Availability
+   - Rating
+   - Roast level (for coffee)
 
-1. **Context API**
+## Shopping Cart
 
-   The application uses React Context for global state management with custom hooks for accessing context:
+### Adding Products
 
-   ```jsx
-   // useAuth.js
-   export const useAuth = () => {
-     const context = useContext(AuthContext);
-     if (context === undefined) {
-       throw new Error('useAuth must be used within an AuthProvider');
-     }
-     return context;
-   };
-   ```
+To add items to your cart:
 
-2. **Local State**
+1. From the product listing page, click "Add to Cart"
+2. From the product detail page:
+   - Select quantity
+   - Choose any available options (grind size, etc.)
+   - Click "Add to Cart"
+3. A confirmation will appear, and the cart icon will update with the number of items
 
-   Component-specific state is managed using React's useState and useReducer hooks:
+### Modifying Quantities
 
-   ```jsx
-   const [quantity, setQuantity] = useState(1);
-   ```
+To change the quantity of an item in your cart:
 
-### Routing
+1. Click on the cart icon to view your cart
+2. Use the "+" and "-" buttons next to each item to adjust quantities
+3. The subtotal will update automatically
 
-1. **Next.js Pages Router**
+### Removing Products
 
-   The application uses Next.js pages router for navigation:
+To remove items from your cart:
 
-   - Dynamic routes: `products/[id].js`
-   - API routes: `pages/api/`
-   - Middleware for route protection
+1. Click on the cart icon to view your cart
+2. Click the "Remove" button next to the item you want to remove
+3. Alternatively, set the quantity to zero
 
-2. **Navigation**
+## Checkout Process
 
-   Links and redirects are handled using Next.js components:
+### Shipping Information
 
-   ```jsx
-   import Link from 'next/link';
-   import { useRouter } from 'next/router';
+To enter shipping details:
 
-   // Link example
-   <Link href="/products">View Products</Link>
+1. Proceed to checkout from your cart
+2. Enter or select your shipping address
+3. Choose your preferred shipping method:
+   - Standard Shipping (3-5 business days)
+   - Express Shipping (1-2 business days)
+   - Next Day Delivery (where available)
 
-   // Programmatic navigation
-   const router = useRouter();
-   router.push('/checkout');
-   ```
+### Payment Options
 
-### UI Components
+We offer several secure payment methods:
 
-1. **Shadcn UI Components**
+1. Credit/Debit Card (Visa, Mastercard, American Express)
+2. PayPal
+3. Apple Pay (on compatible devices)
+4. Google Pay (on compatible devices)
 
-   The application leverages Shadcn UI for styled components:
+Enter your payment details as prompted on the checkout page.
 
-   ```jsx
-   import { Button } from '@/components/ui/button';
-   import { Input } from '@/components/ui/input';
+### Order Review
 
-   <Button variant="primary">Add to Cart</Button>
-   ```
+Before finalizing your purchase:
 
-2. **Custom Components**
+1. Review your order details, including:
+   - Items and quantities
+   - Shipping address
+   - Shipping method
+   - Payment method
+   - Order total (including taxes and shipping)
+2. Apply any discount codes in the designated field
+3. Click "Place Order" to complete your purchase
+4. You'll receive an order confirmation email
 
-   - `ProductCard`: Displays product information in a grid
-   - `CartItem`: Represents an item in the shopping cart
-   - `Pagination`: Handles page navigation for product listings
-   - `OrderSummary`: Displays order details during checkout
+## Order Management
 
-3. **Form Components**
+### Order History
 
-   Forms are built using React Hook Form with Zod validation:
+To view your past orders:
 
-   ```jsx
-   import { useForm } from 'react-hook-form';
-   import { zodResolver } from '@hookform/resolvers/zod';
-   import * as z from 'zod';
+1. Log in to your account
+2. Go to "My Account" > "Order History"
+3. View a list of all your previous orders
+4. Click on any order number for detailed information
 
-   const schema = z.object({
-     email: z.string().email(),
-     password: z.string().min(6)
-   });
+### Order Status Tracking
 
-   function LoginForm() {
-     const { register, handleSubmit, errors } = useForm({
-       resolver: zodResolver(schema)
-     });
+To track the status of your order:
 
-     const onSubmit = (data) => {
-       // Handle form submission
-     };
+1. Log in to your account
+2. Go to "My Account" > "Order History"
+3. Click on the order you want to track
+4. View the current status:
+   - Processing
+   - Shipped
+   - Out for Delivery
+   - Delivered
+5. For shipped orders, a tracking number will be provided
 
-     return (
-       <form onSubmit={handleSubmit(onSubmit)}>
-         <Input {...register('email')} />
-         {errors.email && <p>{errors.email.message}</p>}
-         <Input type="password" {...register('password')} />
-         {errors.password && <p>{errors.password.message}</p>}
-         <Button type="submit">Login</Button>
-       </form>
-     );
-   }
-   ```
+## User Profile
 
-## Backend
+### Profile Management
 
-### Backend Setup and Configuration
+To update your personal information:
 
-1. **Environment Setup**
+1. Log in to your account
+2. Go to "My Account" > "Profile"
+3. Edit your name, email, or phone number
+4. Click "Save Changes"
 
-   The backend requires Node.js and MongoDB. Key configuration files include:
+### Address Book
 
-   - `.env`: Environment variables (not included in the repository)
-   - `.env.example`: Template for environment variables
+To manage your shipping addresses:
 
-   Required environment variables:
-   ```
-   PORT=4000
-   MONGO_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/?retryWrites=true&w=majority&appName=YourAppName
-   JWT_SECRET=your_jwt_secret_key
-   ```
+1. Log in to your account
+2. Go to "My Account" > "Address Book"
+3. Add, edit, or delete addresses
+4. Set a default shipping address
 
-2. **Dependencies**
+### Password Changes
 
-   Key dependencies include:
-   - Express for the web server
-   - Mongoose for MongoDB interactions
-   - bcryptjs for password hashing
-   - jsonwebtoken for JWT authentication
-   - cors for CORS handling
+To change your password:
 
-3. **Starting the Backend**
+1. Log in to your account
+2. Go to "My Account" > "Security"
+3. Enter your current password
+4. Enter and confirm your new password
+5. Click "Update Password"
 
-   ```bash
-   cd server
-   npm install
-   npm run dev
-   ```
+## Troubleshooting
 
-   This starts the development server at http://localhost:4000
+### Common Issues
 
-### API Endpoints
+**Issue**: Unable to log in
+- Ensure your email and password are correct
+- Check if Caps Lock is enabled
+- Try resetting your password
 
-#### User Routes (`/api/users`)
+**Issue**: Payment declined
+- Verify your payment details are correct
+- Ensure your card has sufficient funds
+- Try an alternative payment method
 
-| Method | Endpoint        | Description                 | Auth Required |
-|--------|----------------|-----------------------------|--------------|
-| POST   | /register      | Register a new user         | No           |
-| POST   | /login         | Authenticate user           | No           |
-| GET    | /profile       | Get user profile            | Yes          |
-| PUT    | /profile       | Update user profile         | Yes          |
+**Issue**: Discount code not working
+- Check that the code is entered correctly
+- Verify that the code hasn't expired
+- Confirm that minimum purchase requirements are met
 
-#### Product Routes (`/api/products`)
+### Contact Support
 
-| Method | Endpoint        | Description                 | Auth Required |
-|--------|----------------|-----------------------------|--------------|
-| GET    | /              | Get all products            | No           |
-| GET    | /:id           | Get product by ID           | No           |
-| POST   | /              | Create a new product        | Yes (Admin)  |
-| PUT    | /:id           | Update a product            | Yes (Admin)  |
-| DELETE | /:id           | Delete a product            | Yes (Admin)  |
-
-#### Order Routes (`/api/orders`)
-
-| Method | Endpoint        | Description                 | Auth Required |
-|--------|----------------|-----------------------------|--------------|
-| POST   | /              | Create a new order          | Yes          |
-| GET    | /              | Get all orders (admin)      | Yes (Admin)  |
-| GET    | /myorders      | Get user orders             | Yes          |
-| GET    | /:id           | Get order by ID             | Yes          |
-| PUT    | /:id/pay       | Update order to paid        | Yes          |
-| PUT    | /:id/deliver   | Update order to delivered   | Yes (Admin)  |
-
-### Controllers
-
-Controllers handle the business logic for each route:
-
-1. **User Controller**
-
-   Key functions:
-   - `registerUser`: Create a new user account
-   - `loginUser`: Authenticate user and generate JWT
-   - `getUserProfile`: Retrieve user profile
-   - `updateUserProfile`: Update user information
-
-2. **Product Controller**
-
-   Key functions:
-   - `getProducts`: Retrieve all products
-   - `getProductById`: Get product by ID
-   - `createProduct`: Create a new product
-   - `updateProduct`: Update existing product
-   - `deleteProduct`: Remove a product
-
-3. **Order Controller**
-
-   Key functions:
-   - `createOrder`: Create a new order
-   - `getOrderById`: Get order by ID
-   - `updateOrderToPaid`: Mark order as paid
-   - `updateOrderToDelivered`: Mark order as delivered
-   - `getMyOrders`: Get orders for logged-in user
-   - `getOrders`: Get all orders (admin)
-
-### Models
-
-The application uses Mongoose schemas to define data models:
-
-1. **User Model**
-
-   ```javascript
-   const userSchema = new mongoose.Schema({
-     name: { type: String, required: true },
-     email: { type: String, required: true, unique: true },
-     password: { type: String, required: true },
-     isAdmin: { type: Boolean, required: true, default: false },
-     phone: { type: String },
-     address: {
-       street: { type: String },
-       city: { type: String },
-       state: { type: String },
-       postalCode: { type: String },
-       country: { type: String }
-     }
-   }, {
-     timestamps: true
-   });
-   ```
-
-2. **Product Model**
-
-   ```javascript
-   const productSchema = new mongoose.Schema({
-     name: { type: String, required: true },
-     description: { type: String, required: true },
-     price: { type: Number, required: true },
-     category: { type: String, required: true },
-     image: { type: String },
-     countInStock: { type: Number, default: 0 },
-     rating: { type: Number, default: 0 },
-     numReviews: { type: Number, default: 0 }
-   }, {
-     timestamps: true
-   });
-   ```
-
-3. **Order Model**
-
-   ```javascript
-   const orderSchema = new mongoose.Schema({
-     user: {
-       type: mongoose.Schema.Types.ObjectId,
-       required: true,
-       ref: 'User'
-     },
-     orderItems: [
-       {
-         name: { type: String, required: true },
-         qty: { type: Number, required: true },
-         image: { type: String, required: true },
-         price: { type: Number, required: true },
-         product: {
-           type: mongoose.Schema.Types.ObjectId,
-           required: true,
-           ref: 'Product'
-         }
-       }
-     ],
-     shippingAddress: {
-       address: { type: String, required: true },
-       city: { type: String, required: true },
-       postalCode: { type: String, required: true },
-       country: { type: String, required: true }
-     },
-     paymentMethod: {
-       type: String,
-       required: true
-     },
-     paymentResult: {
-       id: { type: String },
-       status: { type: String },
-       update_time: { type: String },
-       email_address: { type: String }
-     },
-     taxPrice: {
-       type: Number,
-       required: true,
-       default: 0.0
-     },
-     shippingPrice: {
-       type: Number,
-       required: true,
-       default: 0.0
-     },
-     totalPrice: {
-       type: Number,
-       required: true,
-       default: 0.0
-     },
-     isPaid: {
-       type: Boolean,
-       required: true,
-       default: false
-     },
-     paidAt: {
-       type: Date
-     },
-     isDelivered: {
-       type: Boolean,
-       required: true,
-       default: false
-     },
-     deliveredAt: {
-       type: Date
-     }
-   }, {
-     timestamps: true
-   });
-   ```
-
-### Middleware
-
-1. **Auth Middleware**
-
-   The `protect` middleware verifies the JWT token:
-
-   ```javascript
-   exports.protect = async (req, res, next) => {
-     let token;
-
-     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-       try {
-         token = req.headers.authorization.split(' ')[1];
-         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-         req.user = await User.findById(decoded.id).select('-password');
-         next();
-       } catch (error) {
-         res.status(401).json({ message: 'Not authorized, token failed' });
-       }
-     }
-
-     if (!token) {
-       res.status(401).json({ message: 'Not authorized, no token' });
-     }
-   };
-   ```
-
-2. **Admin Middleware**
-
-   The `admin` middleware ensures the user has admin privileges:
-
-   ```javascript
-   exports.admin = (req, res, next) => {
-     if (req.user && req.user.isAdmin) {
-       next();
-     } else {
-       res.status(401).json({ message: 'Not authorized as an admin' });
-     }
-   };
-   ```
-
-## Authentication
-
-1. **JWT Authentication**
-
-   The application uses JSON Web Tokens for authentication:
-
-   - Tokens are generated upon login
-   - Tokens expire after 30 days
-   - Tokens are stored in local storage on the client
-
-   Token generation:
-
-   ```javascript
-   const generateToken = (id) => {
-     return jwt.sign({ id }, process.env.JWT_SECRET, {
-       expiresIn: '30d'
-     });
-   };
-   ```
-
-2. **Password Security**
-
-   Passwords are hashed using bcryptjs before storage:
-
-   ```javascript
-   // Hash password
-   const salt = await bcrypt.genSalt(10);
-   const hashedPassword = await bcrypt.hash(password, salt);
-   ```
-
-3. **Protected Routes**
-
-   Routes that require authentication use the `protect` middleware.
-
-## Database
-
-1. **MongoDB Connection**
-
-   The application connects to MongoDB using Mongoose:
-
-   ```javascript
-   const connectDB = async () => {
-     try {
-       await mongoose.connect(process.env.MONGO_URI);
-       console.log('MongoDB connected');
-     } catch (err) {
-       console.error('MongoDB connection error:', err);
-       process.exit(1);
-     }
-   };
-   ```
-
-2. **Database Seeding**
-
-   Sample data can be imported using the seeder script:
-
-   ```bash
-   npm run data:import    # Import sample data
-   npm run data:destroy   # Remove all data
-   ```
-
-## Deployment
-
-### Frontend Deployment
-
-The frontend is configured for deployment with Vercel:
-
-1. Connect your GitHub repository to Vercel
-2. Configure environment variables
-3. Deploy using the Vercel dashboard
-
-### Backend Deployment
-
-The backend can be deployed to Render or similar Node.js hosting services:
-
-1. Configure environment variables on the hosting platform
-2. Set up MongoDB Atlas connection
-3. Deploy the backend code
-
-## Testing
-
-The project includes basic testing scripts:
-
-```bash
-# Run backend tests
-cd server
-npm test
-
-# Run frontend tests
-cd client
-npm test
-```
-
-Expand test coverage as needed for your specific implementation.
-
-## Common Issues and Solutions
-
-1. **MongoDB Connection Issues**
-
-   - Check that your MongoDB URI is correct
-   - Ensure your IP address is whitelisted in MongoDB Atlas
-   - Verify network connectivity
-
-2. **Authentication Problems**
-
-   - Check that JWT_SECRET is properly set
-   - Ensure tokens are being correctly sent in the Authorization header
-   - Verify token expiration
-
-3. **CORS Errors**
-
-   - Ensure the backend has CORS enabled for the frontend URL
-   - Check for proper headers in API requests
-
-4. **Environment Variable Issues**
-
-   - Verify that all required environment variables are set
-   - Check for typos in variable names
-   - Restart the server after changing environment variables
+If you encounter any issues or have questions:
+
+1. Visit our "Contact Us" page
+2. Fill out the support form with details of your issue
+3. Our customer service team will respond within 24 hours
+
+Alternatively, contact us directly:
+- Email: support@brewbeans.com
+- Phone: 1-800-COFFEE-4-U (1-800-263-3334)
+- Live Chat: Available 8am-8pm EST, Monday-Friday
+
+---
+
+Thank you for choosing Brewbean's Coffee! We're committed to providing you with an exceptional shopping experience and the finest coffee products.
