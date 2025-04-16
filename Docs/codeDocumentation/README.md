@@ -1,631 +1,526 @@
-# Brewbean's Coffee - Code Documentation
+# BrewBeans Coffee E-Commerce - Code Documentation
 
-## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Technology Stack](#technology-stack)
-3. [Project Structure](#project-structure)
-4. [Frontend](#frontend)
-   - [Setup and Configuration](#frontend-setup-and-configuration)
-   - [Key Components](#key-components)
-   - [State Management](#state-management)
-   - [Routing](#routing)
-   - [UI Components](#ui-components)
-5. [Backend](#backend)
-   - [Setup and Configuration](#backend-setup-and-configuration)
-   - [API Endpoints](#api-endpoints)
-   - [Controllers](#controllers)
-   - [Models](#models)
-   - [Middleware](#middleware)
-6. [Authentication](#authentication)
-7. [Database](#database)
-8. [Deployment](#deployment)
-9. [Testing](#testing)
-10. [Common Issues and Solutions](#common-issues-and-solutions)
+## Overview
 
-## Project Overview
-
-Brewbean's Coffee is a full-stack e-commerce application designed for selling premium coffee products. The platform includes user authentication, product browsing, shopping cart functionality, checkout process, order management, and an admin dashboard.
+This document provides technical documentation for developers working on the BrewBeans Coffee E-Commerce platform. It covers the codebase structure, key components, and implementation details.
 
 ## Technology Stack
 
 ### Frontend
-- **Framework**: React 19
-- **Routing**: Next.js 15
-- **State Management**: Context API & React Hooks
-- **Styling**: Tailwind CSS with Shadcn UI
-- **Form Handling**: React Hook Form with Zod validation
-- **Data Visualization**: Recharts
-- **Deployment**: Vercel
+- **Framework**: Next.js 15+
+- **State Management**: React Hooks and Context API
+- **Styling**: Tailwind CSS
+- **API Integration**: Axios
+- **Form Handling**: React Hook Form
 
 ### Backend
-- **Runtime**: Node.js
-- **Framework**: Express
+- **Server**: Express.js
 - **Database**: MongoDB with Mongoose ODM
-- **Authentication**: JSON Web Tokens (JWT)
+- **Authentication**: JWT
+- **API Structure**: RESTful
 
 ## Project Structure
 
-The project follows a standard client-server architecture with separate directories for frontend and backend:
-
 ```
-brewbeans-coffee/
-├── client/                    # Frontend React application
-│   ├── components/            # Reusable UI components
-│   ├── pages/                 # Page components
-│   ├── public/                # Static assets
-│   └── ...                    # Configuration files
+PRJ-666-main/
+├── client/                 # Frontend application
+│   ├── app/                # Next.js app directory
+│   ├── components/         # React components
+│   │   ├── chatbot/        # AI chatbot components
+│   │   └── ui/             # UI components
+│   ├── lib/                # Utility functions & API services
+│   └── public/             # Static assets
 │
-└── server/                    # Backend Express application
-    ├── config/                # Configuration files
-    ├── controllers/           # Route controllers
-    ├── middleware/            # Custom middleware
-    ├── models/                # Mongoose models
-    ├── routes/                # API routes
-    └── ...                    # Other server files
+└── server/                 # Backend application
+    ├── config/             # Configuration files
+    ├── controllers/        # Request handlers
+    ├── models/             # Database models
+    └── routes/             # API routes
 ```
 
-## Frontend
+## Frontend Implementation
 
-### Frontend Setup and Configuration
+### Component Architecture
 
-1. **Environment Setup**
+The frontend follows a component-based architecture with:
 
-   The frontend is built with Next.js 15 and requires Node.js 18+ to run. Key configuration files include:
-
-   - `next.config.mjs`: Next.js configuration
-   - `tailwind.config.js`: Tailwind CSS configuration
-   - `tsconfig.json`: TypeScript configuration
-
-2. **Dependencies**
-
-   Key dependencies include:
-   - React 19 for UI
-   - Next.js 15 for routing and SSR
-   - Tailwind CSS for styling
-   - Shadcn UI for component library
-   - React Hook Form for form handling
-   - Zod for validation
-   - Recharts for data visualization
-
-3. **Starting the Frontend**
-
-   ```bash
-   cd client
-   npm install
-   npm run dev
-   ```
-
-   This starts the development server at http://localhost:3000
-
-### Key Components
-
-1. **Context Providers**
-
-   The application uses React Context for state management:
-
-   - `AuthContext`: Manages user authentication state
-   - `CartContext`: Handles shopping cart state
-   - `ThemeContext`: Manages light/dark mode preferences
-
-   Example usage:
-
-   ```jsx
-   // AuthContext.js
-   export const AuthContext = createContext();
-
-   export const AuthProvider = ({ children }) => {
-     const [user, setUser] = useState(null);
-     const [loading, setLoading] = useState(true);
-
-     // Authentication logic here
-
-     return (
-       <AuthContext.Provider value={{ user, login, logout, register, loading }}>
-         {children}
-       </AuthContext.Provider>
-     );
-   };
-
-   // Usage in a component
-   const { user, login } = useContext(AuthContext);
-   ```
-
-2. **Layout Components**
-
-   The application uses a consistent layout across pages:
-
-   - `Layout`: Main layout wrapper with header, footer, and content area
-   - `DashboardLayout`: Admin dashboard layout
-
-3. **Page Components**
-
-   Each route corresponds to a page component in the `pages` directory:
-
-   - `index.js`: Homepage
-   - `products/[id].js`: Product detail page
-   - `cart.js`: Shopping cart page
-   - `checkout.js`: Checkout page
-   - `profile.js`: User profile page
+1. **Page Components**: Located in `client/app/` directory
+2. **Reusable UI Components**: Located in `client/components/ui/`
+3. **Feature Components**: Located in respective feature directories
 
 ### State Management
 
-1. **Context API**
-
-   The application uses React Context for global state management with custom hooks for accessing context:
-
-   ```jsx
-   // useAuth.js
-   export const useAuth = () => {
-     const context = useContext(AuthContext);
-     if (context === undefined) {
-       throw new Error('useAuth must be used within an AuthProvider');
-     }
-     return context;
-   };
-   ```
-
-2. **Local State**
-
-   Component-specific state is managed using React's useState and useReducer hooks:
-
-   ```jsx
-   const [quantity, setQuantity] = useState(1);
-   ```
-
-### Routing
-
-1. **Next.js Pages Router**
-
-   The application uses Next.js pages router for navigation:
-
-   - Dynamic routes: `products/[id].js`
-   - API routes: `pages/api/`
-   - Middleware for route protection
-
-2. **Navigation**
-
-   Links and redirects are handled using Next.js components:
-
-   ```jsx
-   import Link from 'next/link';
-   import { useRouter } from 'next/router';
-
-   // Link example
-   <Link href="/products">View Products</Link>
-
-   // Programmatic navigation
-   const router = useRouter();
-   router.push('/checkout');
-   ```
-
-### UI Components
-
-1. **Shadcn UI Components**
-
-   The application leverages Shadcn UI for styled components:
-
-   ```jsx
-   import { Button } from '@/components/ui/button';
-   import { Input } from '@/components/ui/input';
-
-   <Button variant="primary">Add to Cart</Button>
-   ```
-
-2. **Custom Components**
-
-   - `ProductCard`: Displays product information in a grid
-   - `CartItem`: Represents an item in the shopping cart
-   - `Pagination`: Handles page navigation for product listings
-   - `OrderSummary`: Displays order details during checkout
-
-3. **Form Components**
-
-   Forms are built using React Hook Form with Zod validation:
-
-   ```jsx
-   import { useForm } from 'react-hook-form';
-   import { zodResolver } from '@hookform/resolvers/zod';
-   import * as z from 'zod';
-
-   const schema = z.object({
-     email: z.string().email(),
-     password: z.string().min(6)
-   });
-
-   function LoginForm() {
-     const { register, handleSubmit, errors } = useForm({
-       resolver: zodResolver(schema)
-     });
-
-     const onSubmit = (data) => {
-       // Handle form submission
-     };
-
-     return (
-       <form onSubmit={handleSubmit(onSubmit)}>
-         <Input {...register('email')} />
-         {errors.email && <p>{errors.email.message}</p>}
-         <Input type="password" {...register('password')} />
-         {errors.password && <p>{errors.password.message}</p>}
-         <Button type="submit">Login</Button>
-       </form>
-     );
-   }
-   ```
-
-## Backend
-
-### Backend Setup and Configuration
-
-1. **Environment Setup**
-
-   The backend requires Node.js and MongoDB. Key configuration files include:
-
-   - `.env`: Environment variables (not included in the repository)
-   - `.env.example`: Template for environment variables
-
-   Required environment variables:
-   ```
-   PORT=4000
-   MONGO_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/?retryWrites=true&w=majority&appName=YourAppName
-   JWT_SECRET=your_jwt_secret_key
-   ```
-
-2. **Dependencies**
-
-   Key dependencies include:
-   - Express for the web server
-   - Mongoose for MongoDB interactions
-   - bcryptjs for password hashing
-   - jsonwebtoken for JWT authentication
-   - cors for CORS handling
-
-3. **Starting the Backend**
-
-   ```bash
-   cd server
-   npm install
-   npm run dev
-   ```
-
-   This starts the development server at http://localhost:4000
-
-### API Endpoints
-
-#### User Routes (`/api/users`)
-
-| Method | Endpoint        | Description                 | Auth Required |
-|--------|----------------|-----------------------------|--------------|
-| POST   | /register      | Register a new user         | No           |
-| POST   | /login         | Authenticate user           | No           |
-| GET    | /profile       | Get user profile            | Yes          |
-| PUT    | /profile       | Update user profile         | Yes          |
-
-#### Product Routes (`/api/products`)
-
-| Method | Endpoint        | Description                 | Auth Required |
-|--------|----------------|-----------------------------|--------------|
-| GET    | /              | Get all products            | No           |
-| GET    | /:id           | Get product by ID           | No           |
-| POST   | /              | Create a new product        | Yes (Admin)  |
-| PUT    | /:id           | Update a product            | Yes (Admin)  |
-| DELETE | /:id           | Delete a product            | Yes (Admin)  |
-
-#### Order Routes (`/api/orders`)
-
-| Method | Endpoint        | Description                 | Auth Required |
-|--------|----------------|-----------------------------|--------------|
-| POST   | /              | Create a new order          | Yes          |
-| GET    | /              | Get all orders (admin)      | Yes (Admin)  |
-| GET    | /myorders      | Get user orders             | Yes          |
-| GET    | /:id           | Get order by ID             | Yes          |
-| PUT    | /:id/pay       | Update order to paid        | Yes          |
-| PUT    | /:id/deliver   | Update order to delivered   | Yes (Admin)  |
-
-### Controllers
-
-Controllers handle the business logic for each route:
-
-1. **User Controller**
-
-   Key functions:
-   - `registerUser`: Create a new user account
-   - `loginUser`: Authenticate user and generate JWT
-   - `getUserProfile`: Retrieve user profile
-   - `updateUserProfile`: Update user information
-
-2. **Product Controller**
-
-   Key functions:
-   - `getProducts`: Retrieve all products
-   - `getProductById`: Get product by ID
-   - `createProduct`: Create a new product
-   - `updateProduct`: Update existing product
-   - `deleteProduct`: Remove a product
-
-3. **Order Controller**
-
-   Key functions:
-   - `createOrder`: Create a new order
-   - `getOrderById`: Get order by ID
-   - `updateOrderToPaid`: Mark order as paid
-   - `updateOrderToDelivered`: Mark order as delivered
-   - `getMyOrders`: Get orders for logged-in user
-   - `getOrders`: Get all orders (admin)
-
-### Models
-
-The application uses Mongoose schemas to define data models:
-
-1. **User Model**
-
-   ```javascript
-   const userSchema = new mongoose.Schema({
-     name: { type: String, required: true },
-     email: { type: String, required: true, unique: true },
-     password: { type: String, required: true },
-     isAdmin: { type: Boolean, required: true, default: false },
-     phone: { type: String },
-     address: {
-       street: { type: String },
-       city: { type: String },
-       state: { type: String },
-       postalCode: { type: String },
-       country: { type: String }
-     }
-   }, {
-     timestamps: true
-   });
-   ```
-
-2. **Product Model**
-
-   ```javascript
-   const productSchema = new mongoose.Schema({
-     name: { type: String, required: true },
-     description: { type: String, required: true },
-     price: { type: Number, required: true },
-     category: { type: String, required: true },
-     image: { type: String },
-     countInStock: { type: Number, default: 0 },
-     rating: { type: Number, default: 0 },
-     numReviews: { type: Number, default: 0 }
-   }, {
-     timestamps: true
-   });
-   ```
-
-3. **Order Model**
-
-   ```javascript
-   const orderSchema = new mongoose.Schema({
-     user: {
-       type: mongoose.Schema.Types.ObjectId,
-       required: true,
-       ref: 'User'
-     },
-     orderItems: [
-       {
-         name: { type: String, required: true },
-         qty: { type: Number, required: true },
-         image: { type: String, required: true },
-         price: { type: Number, required: true },
-         product: {
-           type: mongoose.Schema.Types.ObjectId,
-           required: true,
-           ref: 'Product'
-         }
-       }
-     ],
-     shippingAddress: {
-       address: { type: String, required: true },
-       city: { type: String, required: true },
-       postalCode: { type: String, required: true },
-       country: { type: String, required: true }
-     },
-     paymentMethod: {
-       type: String,
-       required: true
-     },
-     paymentResult: {
-       id: { type: String },
-       status: { type: String },
-       update_time: { type: String },
-       email_address: { type: String }
-     },
-     taxPrice: {
-       type: Number,
-       required: true,
-       default: 0.0
-     },
-     shippingPrice: {
-       type: Number,
-       required: true,
-       default: 0.0
-     },
-     totalPrice: {
-       type: Number,
-       required: true,
-       default: 0.0
-     },
-     isPaid: {
-       type: Boolean,
-       required: true,
-       default: false
-     },
-     paidAt: {
-       type: Date
-     },
-     isDelivered: {
-       type: Boolean,
-       required: true,
-       default: false
-     },
-     deliveredAt: {
-       type: Date
-     }
-   }, {
-     timestamps: true
-   });
-   ```
-
-### Middleware
-
-1. **Auth Middleware**
-
-   The `protect` middleware verifies the JWT token:
-
-   ```javascript
-   exports.protect = async (req, res, next) => {
-     let token;
-
-     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-       try {
-         token = req.headers.authorization.split(' ')[1];
-         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-         req.user = await User.findById(decoded.id).select('-password');
-         next();
-       } catch (error) {
-         res.status(401).json({ message: 'Not authorized, token failed' });
-       }
-     }
-
-     if (!token) {
-       res.status(401).json({ message: 'Not authorized, no token' });
-     }
-   };
-   ```
-
-2. **Admin Middleware**
-
-   The `admin` middleware ensures the user has admin privileges:
-
-   ```javascript
-   exports.admin = (req, res, next) => {
-     if (req.user && req.user.isAdmin) {
-       next();
-     } else {
-       res.status(401).json({ message: 'Not authorized as an admin' });
-     }
-   };
-   ```
+State is managed using React Hooks and Context API:
+
+```jsx
+// Example of context setup (client/lib/context/CartContext.js)
+import { createContext, useReducer, useContext } from 'react';
+
+const CartContext = createContext();
+
+export function CartProvider({ children }) {
+  const [state, dispatch] = useReducer(cartReducer, { items: [] });
+  
+  return (
+    <CartContext.Provider value={{ state, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
+}
+
+export function useCart() {
+  return useContext(CartContext);
+}
+```
+
+### API Integration
+
+API calls are handled using Axios with custom hook wrappers:
+
+```jsx
+// Example API service (client/lib/api/products.js)
+import axios from 'axios';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export async function getProducts() {
+  try {
+    const response = await axios.get(`${API_URL}/products`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+}
+```
+
+## AI Chatbot Implementation
+
+### Chatbot Architecture
+
+The chatbot consists of several components:
+
+1. **ChatbotContainer**: Main wrapper component that manages state
+2. **ChatbotHeader**: Contains title and close button
+3. **ChatbotMessages**: Displays conversation history
+4. **ChatbotInput**: Handles user input and voice recognition
+
+### Voice Input Implementation
+
+Voice input uses the Web Speech API and optional Whisper ASR:
+
+```jsx
+// Simplified example from client/components/chatbot/VoiceInput.js
+import { useState, useRef } from 'react';
+
+export function VoiceInput({ onTranscript }) {
+  const [isRecording, setIsRecording] = useState(false);
+  const mediaRecorderRef = useRef(null);
+  const chunksRef = useRef([]);
+  
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      
+      mediaRecorderRef.current.ondataavailable = (e) => {
+        chunksRef.current.push(e.data);
+      };
+      
+      mediaRecorderRef.current.onstop = async () => {
+        const audioBlob = new Blob(chunksRef.current);
+        const formData = new FormData();
+        formData.append('audio', audioBlob);
+        
+        try {
+          const response = await fetch('/api/whisper', {
+            method: 'POST',
+            body: formData,
+          });
+          
+          const data = await response.json();
+          onTranscript(data.text);
+        } catch (error) {
+          console.error('Error transcribing audio:', error);
+        }
+        
+        chunksRef.current = [];
+      };
+      
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+    }
+  };
+  
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+  
+  return (
+    <button
+      onClick={isRecording ? stopRecording : startRecording}
+      className={`p-2 rounded-full ${isRecording ? 'bg-red-500' : 'bg-blue-500'}`}
+    >
+      <MicrophoneIcon className="w-5 h-5 text-white" />
+    </button>
+  );
+}
+```
+
+### Chatbot Response Generation
+
+The chatbot uses either simple keyword matching or Hugging Face models:
+
+```jsx
+// Example implementation of response generation
+async function generateResponse(message, useHuggingFace = false) {
+  if (useHuggingFace && process.env.NEXT_PUBLIC_HUGGINGFACE_API_KEY) {
+    try {
+      const response = await fetch(
+        `https://api-inference.huggingface.co/models/${MODEL_ID}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_HUGGINGFACE_API_KEY}`,
+          },
+          body: JSON.stringify({ inputs: message }),
+        }
+      );
+      
+      const data = await response.json();
+      return data[0].generated_text;
+    } catch (error) {
+      console.error('Error with Hugging Face API:', error);
+      return fallbackResponse(message);
+    }
+  } else {
+    return fallbackResponse(message);
+  }
+}
+
+function fallbackResponse(message) {
+  const lowerMessage = message.toLowerCase();
+  
+  if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+    return 'Hello! How can I help you with your coffee shopping today?';
+  } else if (lowerMessage.includes('product') || lowerMessage.includes('coffee')) {
+    return 'We have a variety of coffee products. Are you looking for beans, equipment, or accessories?';
+  }
+  // More keyword matching logic...
+  
+  return "I'm not sure how to help with that. Would you like to browse our featured products?";
+}
+```
+
+## Backend Implementation
+
+### Server Setup
+
+```javascript
+// Example from server/index.js
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Database connection
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+// Routes
+app.use('/api/products', require('./routes/product'));
+app.use('/api/users', require('./routes/user'));
+app.use('/api/orders', require('./routes/order'));
+app.use('/api/chatbot', require('./routes/chatbot'));
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!' });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+### Database Models
+
+```javascript
+// Example from server/models/Product.js
+const mongoose = require('mongoose');
+
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: ['beans', 'equipment', 'accessories']
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  origin: {
+    type: String,
+    required: function() {
+      return this.category === 'beans';
+    }
+  },
+  roastLevel: {
+    type: String,
+    enum: ['light', 'medium', 'dark', 'none'],
+    default: 'none'
+  },
+  inStock: {
+    type: Boolean,
+    default: true
+  }
+}, {
+  timestamps: true
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;
+```
+
+### API Controllers
+
+```javascript
+// Example from server/controllers/productController.js
+const Product = require('../models/Product');
+
+// Get all products
+exports.getProducts = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Get product by ID
+exports.getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Create product
+exports.createProduct = async (req, res) => {
+  try {
+    const product = new Product(req.body);
+    const savedProduct = await product.save();
+    res.status(201).json(savedProduct);
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid data', error: error.message });
+  }
+};
+```
 
 ## Authentication
 
-1. **JWT Authentication**
+JWT-based authentication is implemented:
 
-   The application uses JSON Web Tokens for authentication:
+```javascript
+// Example from server/middleware/auth.js
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-   - Tokens are generated upon login
-   - Tokens expire after 30 days
-   - Tokens are stored in local storage on the client
+exports.protect = async (req, res, next) => {
+  let token;
+  
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    try {
+      // Get token from header
+      token = req.headers.authorization.split(' ')[1];
+      
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      
+      // Get user from token
+      req.user = await User.findById(decoded.id).select('-password');
+      
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(401).json({ message: 'Not authorized, token failed' });
+    }
+  }
+  
+  if (!token) {
+    res.status(401).json({ message: 'Not authorized, no token' });
+  }
+};
 
-   Token generation:
+exports.admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).json({ message: 'Not authorized as admin' });
+  }
+};
+```
 
-   ```javascript
-   const generateToken = (id) => {
-     return jwt.sign({ id }, process.env.JWT_SECRET, {
-       expiresIn: '30d'
-     });
-   };
-   ```
+## Whisper ASR Integration
 
-2. **Password Security**
+```javascript
+// Example from server/routes/whisper.js
+const express = require('express');
+const router = express.Router();
+const multer = require('multer');
+const fetch = require('node-fetch');
+const FormData = require('form-data');
+const fs = require('fs');
+const path = require('path');
 
-   Passwords are hashed using bcryptjs before storage:
+const upload = multer({ dest: 'uploads/' });
 
-   ```javascript
-   // Hash password
-   const salt = await bcrypt.genSalt(10);
-   const hashedPassword = await bcrypt.hash(password, salt);
-   ```
+router.post('/', upload.single('audio'), async (req, res) => {
+  try {
+    const audioPath = req.file.path;
+    
+    // Option 1: Mock response for development
+    const transcription = "How much is the Ethiopian coffee?";
+    res.json({ text: transcription });
+    
+    // Option 2: Using Whisper API (implementation depends on setup)
+    /*
+    const formData = new FormData();
+    formData.append('file', fs.createReadStream(audioPath));
+    formData.append('model', 'whisper-1');
+    
+    const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: formData
+    });
+    
+    const data = await response.json();
+    res.json({ text: data.text });
+    */
+    
+    // Clean up uploaded file
+    fs.unlinkSync(audioPath);
+  } catch (error) {
+    console.error('Error transcribing audio:', error);
+    res.status(500).json({ message: 'Error processing audio' });
+  }
+});
 
-3. **Protected Routes**
-
-   Routes that require authentication use the `protect` middleware.
-
-## Database
-
-1. **MongoDB Connection**
-
-   The application connects to MongoDB using Mongoose:
-
-   ```javascript
-   const connectDB = async () => {
-     try {
-       await mongoose.connect(process.env.MONGO_URI);
-       console.log('MongoDB connected');
-     } catch (err) {
-       console.error('MongoDB connection error:', err);
-       process.exit(1);
-     }
-   };
-   ```
-
-2. **Database Seeding**
-
-   Sample data can be imported using the seeder script:
-
-   ```bash
-   npm run data:import    # Import sample data
-   npm run data:destroy   # Remove all data
-   ```
-
-## Deployment
-
-### Frontend Deployment
-
-The frontend is configured for deployment with Vercel:
-
-1. Connect your GitHub repository to Vercel
-2. Configure environment variables
-3. Deploy using the Vercel dashboard
-
-### Backend Deployment
-
-The backend can be deployed to Render or similar Node.js hosting services:
-
-1. Configure environment variables on the hosting platform
-2. Set up MongoDB Atlas connection
-3. Deploy the backend code
+module.exports = router;
+```
 
 ## Testing
 
-The project includes basic testing scripts:
+Unit tests are implemented using Jest:
 
-```bash
-# Run backend tests
-cd server
-npm test
+```javascript
+// Example test for product API
+const request = require('supertest');
+const app = require('../server');
+const mongoose = require('mongoose');
+const Product = require('../models/Product');
 
-# Run frontend tests
-cd client
-npm test
+describe('Product API', () => {
+  beforeAll(async () => {
+    // Connect to test database
+    await mongoose.connect(process.env.MONGODB_URI_TEST);
+  });
+  
+  afterAll(async () => {
+    // Disconnect from test database
+    await mongoose.connection.close();
+  });
+  
+  beforeEach(async () => {
+    // Clear test database
+    await Product.deleteMany({});
+  });
+  
+  it('should get all products', async () => {
+    // Add test products
+    await Product.create([
+      { name: 'Test Coffee 1', price: 12.99, category: 'beans', description: 'Test description', image: 'test.jpg' },
+      { name: 'Test Coffee 2', price: 14.99, category: 'beans', description: 'Test description', image: 'test.jpg' }
+    ]);
+    
+    const res = await request(app).get('/api/products');
+    
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.length).toEqual(2);
+    expect(res.body[0]).toHaveProperty('name');
+  });
+});
 ```
 
-Expand test coverage as needed for your specific implementation.
+## Deployment
 
-## Common Issues and Solutions
+The application is configured for deployment on various platforms:
 
-1. **MongoDB Connection Issues**
+### Frontend (Vercel/Netlify)
+- Configuration in `next.config.js`
+- Environment variables set in platform dashboard
 
-   - Check that your MongoDB URI is correct
-   - Ensure your IP address is whitelisted in MongoDB Atlas
-   - Verify network connectivity
+### Backend (Heroku/AWS)
+- Procfile for Heroku: `web: node server/index.js`
+- PM2 configuration for AWS/VPS deployment
 
-2. **Authentication Problems**
+## Contributing Guidelines
 
-   - Check that JWT_SECRET is properly set
-   - Ensure tokens are being correctly sent in the Authorization header
-   - Verify token expiration
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature-name`
+3. Follow code style and patterns in existing files
+4. Write tests for new features
+5. Submit pull request with detailed description
 
-3. **CORS Errors**
+## Troubleshooting Common Issues
 
-   - Ensure the backend has CORS enabled for the frontend URL
-   - Check for proper headers in API requests
-
-4. **Environment Variable Issues**
-
-   - Verify that all required environment variables are set
-   - Check for typos in variable names
-   - Restart the server after changing environment variables
+- **API Connection Issues**: Check environment variables and CORS settings
+- **Database Errors**: Verify MongoDB connection string and schema validation
+- **Authentication Problems**: Check JWT expiration and token verification
+- **Build Failures**: Check for dependency conflicts or version issues
