@@ -1,271 +1,307 @@
-# Brewbean's Coffee - User Documentation
+# BrewBeans Coffee E-Commerce Platform - User Guide
+
+![BrewBeans Logo](https://via.placeholder.com/150x150?text=BrewBeans)
+
+*Welcome to BrewBeans Coffee - Your premium online coffee shopping destination*
+
+---
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Getting Started](#getting-started)
-   - [Account Creation](#account-creation)
-   - [Logging In](#logging-in)
-   - [Password Recovery](#password-recovery)
-3. [Shopping](#shopping)
-   - [Browsing Products](#browsing-products)
-   - [Product Details](#product-details)
-   - [Search and Filters](#search-and-filters)
-4. [Shopping Cart](#shopping-cart)
-   - [Adding Products](#adding-products)
-   - [Modifying Quantities](#modifying-quantities)
-   - [Removing Products](#removing-products)
-5. [Checkout Process](#checkout-process)
-   - [Shipping Information](#shipping-information)
-   - [Payment Options](#payment-options)
-   - [Order Review](#order-review)
-6. [Order Management](#order-management)
-   - [Order History](#order-history)
-   - [Order Status Tracking](#order-status-tracking)
-7. [User Profile](#user-profile)
-   - [Profile Management](#profile-management)
-   - [Address Book](#address-book)
-   - [Password Changes](#password-changes)
+
+1. [Getting Started](#getting-started)
+2. [Creating an Account](#creating-an-account)
+3. [Shopping Experience](#shopping-experience)
+4. [Using the AI Shopping Assistant](#using-the-ai-shopping-assistant)
+5. [Checkout Process](#checkout-process) 
+6. [Managing Your Orders](#managing-your-orders)
+7. [Account Management](#account-management)
 8. [Troubleshooting](#troubleshooting)
-   - [Common Issues](#common-issues)
-   - [Contact Support](#contact-support)
 
-## Introduction
-
-Welcome to Brewbean's Coffee, your premier online destination for premium coffee products! Our platform offers a wide range of coffee beans, brewing equipment, and accessories to enhance your coffee experience.
-
-This documentation will guide you through the features and functionality of our e-commerce platform, helping you navigate, shop, and manage your orders with ease.
+---
 
 ## Getting Started
 
-### Account Creation
+### Accessing the Platform
+
+To access the BrewBeans Coffee E-Commerce platform:
+
+1. Open your web browser
+2. Navigate to [brewbeanscoffee.com](https://brewbeanscoffee.com) (placeholder URL)
+3. The homepage displays featured products, current promotions, and navigation options
+
+### System Requirements
+
+The BrewBeans platform works best on:
+- Modern web browsers (Chrome, Firefox, Safari, Edge)
+- Both desktop and mobile devices
+- Stable internet connection
+
+---
+
+## Creating an Account
+
+### Registration
 
 To create a new account:
 
-1. Click on the "Register" button in the top-right corner of the homepage
+1. Click the "Sign Up" or "Register" button in the top-right corner
 2. Fill in the required information:
-   - Full Name
-   - Email Address
-   - Password (minimum 6 characters)
-   - Phone Number (optional)
-   - Address (optional at this stage)
-3. Click "Create Account"
-4. Verify your email address by clicking the link sent to your email
+   - Email address
+   - Password (at least 8 characters with letters and numbers)
+   - Name
+   - Shipping address (optional during signup)
+3. Review and accept the Terms of Service and Privacy Policy
+4. Click "Create Account"
+5. Verify your email address by clicking the link sent to your inbox
 
-### Logging In
+### Login
 
-To log in to your existing account:
+To access your existing account:
 
-1. Click on the "Login" button in the top-right corner of the homepage
-2. Enter your email address and password
+1. Click the "Login" button in the top-right corner
+2. Enter your email and password
 3. Click "Login"
-4. If you check "Remember Me," your session will remain active for 30 days
+4. Use the "Remember Me" option to stay logged in on trusted devices
+5. Use "Forgot Password" if you need to reset your credentials
 
-### Password Recovery
+---
 
-If you've forgotten your password:
-
-1. Click on the "Login" button
-2. Click on "Forgot Password" below the login form
-3. Enter your email address
-4. Click "Reset Password"
-5. Check your email for password reset instructions
-6. Follow the link to create a new password
-
-## Shopping
+## Shopping Experience
 
 ### Browsing Products
 
-Our products are organized into categories for easy browsing:
+Navigate the product catalog:
 
-- **Coffee Beans**: Browse by region, roast level, or flavor profile
-- **Equipment**: Brewing equipment, grinders, and accessories
-- **Merchandise**: Brewbean's branded items
-
-To browse products:
-
-1. Click on the desired category from the main navigation menu
-2. Scroll through available products
-3. Use filters on the left sidebar to narrow down options
+1. Use the main menu to browse by category (Beans, Equipment, Accessories)
+2. Use the search bar to find specific products
+3. Apply filters to narrow down results:
+   - Origin (Ethiopia, Colombia, Brazil, etc.)
+   - Roast level (Light, Medium, Dark)
+   - Price range
+   - Customer ratings
+4. Sort products by popularity, price, or newest arrivals
 
 ### Product Details
 
-To view detailed information about a product:
+When viewing a product:
 
-1. Click on the product image or name
-2. The product page displays:
-   - High-resolution images
-   - Price and availability
-   - Detailed description
-   - Specifications
-   - Customer reviews and ratings
+1. Multiple high-quality images show the product from different angles
+2. Detailed descriptions explain flavor profiles and product features
+3. Specifications include:
+   - Origin information
+   - Roast level
+   - Tasting notes
+   - Processing method
+   - Package size options
+4. Customer reviews provide insights from other buyers
+5. Related products are displayed at the bottom of the page
 
-### Search and Filters
+### Shopping Cart
 
-To find specific products:
+Managing your shopping cart:
 
-1. Use the search bar at the top of the page
-2. Enter keywords related to the product you're looking for
-3. Apply filters to refine search results:
-   - Price range
-   - Product category
-   - Availability
-   - Rating
-   - Roast level (for coffee)
+1. Click "Add to Cart" on any product page
+2. Adjust quantity as needed
+3. Access your cart by clicking the cart icon in the top navigation
+4. Review selected items before proceeding to checkout
+5. Save items for later if you're not ready to purchase
+6. Remove items you no longer want
 
-## Shopping Cart
+---
 
-### Adding Products
+## Using the AI Shopping Assistant
 
-To add items to your cart:
+### Accessing the Chatbot
 
-1. From the product listing page, click "Add to Cart"
-2. From the product detail page:
-   - Select quantity
-   - Choose any available options (grind size, etc.)
-   - Click "Add to Cart"
-3. A confirmation will appear, and the cart icon will update with the number of items
+1. Look for the chat bubble icon in the bottom-right corner of any page
+2. Click the icon to open the chatbot interface
+3. The welcome message will appear with suggested questions
 
-### Modifying Quantities
+### Text Interaction
 
-To change the quantity of an item in your cart:
+To ask questions via text:
 
-1. Click on the cart icon to view your cart
-2. Use the "+" and "-" buttons next to each item to adjust quantities
-3. The subtotal will update automatically
+1. Type your question in the input field at the bottom of the chat window
+2. Press Enter or click the send button (arrow icon)
+3. Wait for the AI assistant to respond
+4. Click on any suggested quick replies that appear below responses
 
-### Removing Products
+### Voice Interaction
 
-To remove items from your cart:
+To use voice commands:
 
-1. Click on the cart icon to view your cart
-2. Click the "Remove" button next to the item you want to remove
-3. Alternatively, set the quantity to zero
+1. Click the microphone icon in the chat input area
+2. When prompted, allow microphone access in your browser
+3. Speak your question clearly
+4. Click the microphone icon again to stop recording
+5. The system will transcribe your question and provide a response
+
+### Sample Questions
+
+The AI assistant can help with:
+
+- "What coffee would you recommend for espresso?"
+- "Do you have any Ethiopian coffee beans?"
+- "What's the difference between light and dark roast?"
+- "How long does shipping take?"
+- "What brewing method works best for medium roast?"
+- "What's your return policy?"
+- "Do you offer gift wrapping?"
+- "What coffee is on sale this week?"
+- "I need help choosing a coffee grinder"
+- "Track my order #12345"
+
+---
 
 ## Checkout Process
 
-### Shipping Information
+### Placing an Order
 
-To enter shipping details:
+To complete your purchase:
 
-1. Proceed to checkout from your cart
-2. Enter or select your shipping address
-3. Choose your preferred shipping method:
-   - Standard Shipping (3-5 business days)
-   - Express Shipping (1-2 business days)
-   - Next Day Delivery (where available)
+1. Review items in your cart
+2. Click "Proceed to Checkout"
+3. Sign in or continue as a guest
+4. Enter or select your shipping address
+5. Choose a shipping method:
+   - Standard (5-7 business days)
+   - Express (2-3 business days)
+   - Next-day (where available)
+6. Enter or select payment information:
+   - Credit/debit card
+   - PayPal
+   - Store credit
+7. Review order details, including subtotal, shipping, taxes, and total
+8. Apply any promo codes in the designated field
+9. Click "Place Order" to complete your purchase
 
-### Payment Options
+### Order Confirmation
 
-We offer several secure payment methods:
+After placing an order:
 
-1. Credit/Debit Card (Visa, Mastercard, American Express)
-2. PayPal
-3. Apple Pay (on compatible devices)
-4. Google Pay (on compatible devices)
+1. A confirmation page displays your order details and order number
+2. A confirmation email is sent to your registered email address
+3. You can track your order status through your account dashboard
 
-Enter your payment details as prompted on the checkout page.
+---
 
-### Order Review
-
-Before finalizing your purchase:
-
-1. Review your order details, including:
-   - Items and quantities
-   - Shipping address
-   - Shipping method
-   - Payment method
-   - Order total (including taxes and shipping)
-2. Apply any discount codes in the designated field
-3. Click "Place Order" to complete your purchase
-4. You'll receive an order confirmation email
-
-## Order Management
+## Managing Your Orders
 
 ### Order History
 
-To view your past orders:
+To view your previous orders:
 
 1. Log in to your account
-2. Go to "My Account" > "Order History"
-3. View a list of all your previous orders
-4. Click on any order number for detailed information
+2. Navigate to "My Account" > "Order History"
+3. View a list of all orders, sorted by date
+4. Click on any order to view details:
+   - Order number
+   - Date placed
+   - Items ordered
+   - Shipping address
+   - Payment method
+   - Order status
 
-### Order Status Tracking
+### Order Tracking
 
-To track the status of your order:
+To track the status of your current orders:
 
 1. Log in to your account
-2. Go to "My Account" > "Order History"
-3. Click on the order you want to track
-4. View the current status:
+2. Navigate to "My Account" > "Order History"
+3. Find the order you want to track
+4. Click "Track Order" or "View Details"
+5. See the current status:
+   - Order received
    - Processing
-   - Shipped
-   - Out for Delivery
+   - Shipped (with tracking number)
    - Delivered
-5. For shipped orders, a tracking number will be provided
+6. Click on the tracking number to view detailed carrier information
 
-## User Profile
+### Returns and Refunds
 
-### Profile Management
-
-To update your personal information:
+If you need to return an item:
 
 1. Log in to your account
-2. Go to "My Account" > "Profile"
-3. Edit your name, email, or phone number
-4. Click "Save Changes"
+2. Navigate to "My Account" > "Order History"
+3. Find the order containing the item to return
+4. Click "Return Items"
+5. Select the items you wish to return
+6. Choose a reason for the return
+7. Submit your return request
+8. Follow the provided instructions for packaging and shipping the return
+9. Track the status of your refund through your account
+
+---
+
+## Account Management
+
+### Profile Settings
+
+To update your account information:
+
+1. Log in to your account
+2. Navigate to "My Account" > "Profile"
+3. Edit personal information:
+   - Name
+   - Email address
+   - Phone number
+   - Password
+4. Click "Save Changes" to update your profile
 
 ### Address Book
 
 To manage your shipping addresses:
 
 1. Log in to your account
-2. Go to "My Account" > "Address Book"
-3. Add, edit, or delete addresses
-4. Set a default shipping address
+2. Navigate to "My Account" > "Address Book"
+3. View all saved addresses
+4. Add new addresses by clicking "Add New Address"
+5. Set a default shipping address
+6. Edit or delete existing addresses as needed
 
-### Password Changes
+### Payment Methods
 
-To change your password:
+To manage your payment information:
 
 1. Log in to your account
-2. Go to "My Account" > "Security"
-3. Enter your current password
-4. Enter and confirm your new password
-5. Click "Update Password"
+2. Navigate to "My Account" > "Payment Methods"
+3. View all saved payment methods
+4. Add new payment methods by clicking "Add Payment Method"
+5. Set a default payment method
+6. Remove outdated payment methods as needed
+
+### Preferences
+
+To customize your shopping experience:
+
+1. Log in to your account
+2. Navigate to "My Account" > "Preferences"
+3. Set communication preferences:
+   - Email newsletters
+   - Order notifications
+   - Promotional alerts
+   - Product recommendations
+4. Choose display preferences:
+   - Currency
+   - Units (metric/imperial)
+
+---
 
 ## Troubleshooting
 
 ### Common Issues
 
-**Issue**: Unable to log in
-- Ensure your email and password are correct
-- Check if Caps Lock is enabled
-- Try resetting your password
+**Issue**: I forgot my password
+**Solution**: Click "Forgot Password" on the login page and follow the email instructions
 
-**Issue**: Payment declined
-- Verify your payment details are correct
-- Ensure your card has sufficient funds
-- Try an alternative payment method
+**Issue**: My order hasn't arrived
+**Solution**: Check order status in your account. If it shows as "Shipped," check the tracking information. Contact support if the tracking shows delivery but you haven't received it.
 
-**Issue**: Discount code not working
-- Check that the code is entered correctly
-- Verify that the code hasn't expired
-- Confirm that minimum purchase requirements are met
+**Issue**: I received the wrong item
+**Solution**: Contact customer support with your order number and photos of the received item
 
-### Contact Support
+**Issue**: The AI assistant doesn't understand my question
+**Solution**: Try rephrasing your question with simpler terms or use one of the suggested quick replies
 
-If you encounter any issues or have questions:
-
-1. Visit our "Contact Us" page
-2. Fill out the support form with details of your issue
-3. Our customer service team will respond within 24 hours
-
-Alternatively, contact us directly:
-- Email: support@brewbeans.com
-- Phone: 1-800-COFFEE-4-U (1-800-263-3334)
-- Live Chat: Available 8am-8pm EST, Monday-Friday
-
----
-
-Thank you for choosing Brewbean's Coffee! We're committed to providing you with an exceptional shopping experience and the finest coffee products.
+**Issue**: I can't add items to my cart
+**Solution**: Try refreshing the page or clearing your browser cache
